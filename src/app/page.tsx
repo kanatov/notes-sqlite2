@@ -1,5 +1,4 @@
-import Image from "next/image";
-
-export default function Home() {
-  return <h1>Notes</h1>;
+// This page file is required by Next.js, but not used in this project
+export default function DefaultPage() {
+  return null;
 }
