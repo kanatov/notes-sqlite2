@@ -1,14 +1,13 @@
 {
   "name": "notes-sqlite",
-  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "init-db": "node ./data/init.js",
-    "postinstall": "npm run init-db",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "init-db": "node ./data/init.js",
+    "postinstall": "npm run init-db"
   },
   "dependencies": {
     "next": "15.2.4",
