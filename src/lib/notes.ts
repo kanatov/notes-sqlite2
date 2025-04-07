@@ -1,13 +1,12 @@
 import sqlite3 from "sqlite3";
 import { open, Database } from "sqlite";
 import path from "path";
-import { log } from "console";
 
 const TABLE = "notes";
-
+const DB_FILE = "data/notes.sqlite";
 let db: Database | null = null;
 
-interface Note {
+export interface Note {
   id: number;
   title: string;
   content: string;
@@ -18,14 +17,13 @@ export async function getDB(): Promise<Database> {
   if (!db) {
     try {
       db = await open({
-        filename: path.join(process.cwd(), "data/notes.sqlite"),
+        filename: path.join(process.cwd(), DB_FILE),
         driver: sqlite3.Database,
       });
 
       const tableExists = await db.get(
         `SELECT name FROM sqlite_master WHERE type='table' AND name='${TABLE}';`
       );
-      console.log(`Table '${TABLE}' exists:`, tableExists);
 
       if (!tableExists) {
         console.error(`The '${TABLE}' table does not exist in the database.`);
@@ -45,10 +43,44 @@ export async function getAllNotes(): Promise<Note[]> {
   // In real application I would write a paginated query
   // but for this example I will just fetch all the notes
   const db = await getDB();
-  return db.all<Note[]>("SELECT * FROM notes");
+  return db.all<Note[]>(`SELECT * FROM ${TABLE}`);
 }
 
 export async function getNote(id: string): Promise<Note | undefined> {
   const db = await getDB();
-  return db.get<Note>("SELECT * FROM notes WHERE id = ?", id);
+  return db.get<Note>(`SELECT * FROM ${TABLE} WHERE id = ?`, id);
+}
+
+export async function deleteNoteById(id: number) {
+  const db = await getDB();
+  return db.run(`DELETE FROM ${TABLE} WHERE id = ?`, id);
+}
+
+export async function updateNote(note: {
+  id: number;
+  title: string;
+  content: string;
+}) {
+  const db = await getDB();
+  return db.run(
+    `UPDATE ${TABLE}
+    SET title = ?,
+    content = ?,
+    updated_at = CURRENT_TIMESTAMP 
+    WHERE id = ?`, // Timestamp stored in UTC
+    note.title,
+    note.content,
+    note.id
+  );
+}
+
+export async function addNote(): Promise<Note | undefined> {
+  const db = await getDB();
+  const result = await db.run(
+    `INSERT INTO ${TABLE} (title, content) VALUES (?, ?)`,
+    "",
+    ""
+  );
+  const id = result.lastID;
+  return db.get<Note>(`SELECT * FROM ${TABLE} WHERE id = ?`, id);
 }

@@ -1,49 +1,23 @@
-import Link from "next/link";
+import EditForm from "@/components/EditForm";
 import { getNote } from "@/lib/notes";
+import { notFound } from "next/navigation";
 
-export default async function DefaultPage({
+export default async function EditNotePage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  let note = {
-    title: "New note",
-    content: "New note content",
-    updated_at: new Date().toLocaleDateString(),
-  };
-  if (id === "new") {
-    // new note
-  } else {
-    const existingNote = await getNote(id);
-    if (existingNote) {
-      note = existingNote;
-    }
-    return (
-      <div className="fixed inset-0 bg-[#00000080] flex items-center justify-center">
-        <dialog className="bg-white m-0 relative" open>
-          <form method="dialog">
-            <h3>{note.title}</h3>
-            <p>{note.updated_at}</p>
-            <p className="whitespace-break-spaces">{note.content}</p>
-            <Link href="/" aria-label="Close">
-              Close
-            </Link>
-          </form>
-        </dialog>
-      </div>
-    );
+  let note = await getNote(id);
+  if (!note) {
+    notFound();
   }
+
   return (
-    <div className="fixed inset-0 bg-[#00000080] flex items-center justify-center">
-      <dialog className="bg-white m-0 relative" open>
-        <p>Note ID: {id}</p>
-        <form method="dialog">
-          <button>Save</button>
-          <Link href="/" aria-label="Close">
-            Close
-          </Link>
-        </form>
+    <div className="fixed z-20 inset-0 bg-[#000000A0] flex items-center justify-center">
+      <dialog className="bg-white m-0 relative w-[500px] p-4" open>
+        <h2 className="text-lg font-bold mb-4">Edit Note</h2>
+        <EditForm note={note} />
       </dialog>
     </div>
   );

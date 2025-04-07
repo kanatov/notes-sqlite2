@@ -16,6 +16,7 @@ async function initDatabase() {
       driver: sqlite3.Database,
     });
 
+    // Timestamp stored in UTC
     await db.exec(`
       CREATE TABLE IF NOT EXISTS ${TABLE_NAME} (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
