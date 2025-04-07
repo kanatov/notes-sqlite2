@@ -17,7 +17,7 @@ function readFormData(formData: FormData) {
 }
 
 export async function updateNoteAction(
-  prevState: FormActionState | null,
+  _prevState: FormActionState | null,
   formData: FormData
 ): Promise<FormActionState> {
   const { id, title, content } = readFormData(formData);
@@ -31,7 +31,7 @@ export async function updateNoteAction(
 }
 
 export async function deleteNoteAction(
-  prevState: FormActionState | null,
+  _prevState: FormActionState | null,
   formData: FormData
 ): Promise<FormActionState> {
   const { id } = readFormData(formData);
@@ -45,7 +45,7 @@ export async function deleteNoteAction(
 }
 
 export async function addNoteAction(
-  prevState: FormActionState | null
+  _prevState: FormActionState | null
 ): Promise<FormActionState> {
   const note = await addNote();
   if (!note) {

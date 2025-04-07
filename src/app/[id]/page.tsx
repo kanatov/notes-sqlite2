@@ -8,7 +8,7 @@ export default async function EditNotePage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  let note = await getNote(id);
+  const note = await getNote(id);
   if (!note) {
     notFound();
   }

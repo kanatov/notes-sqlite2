@@ -3,7 +3,7 @@ import { useEffect, useActionState } from "react";
 import { useRouter } from "next/navigation";
 import { addNoteAction } from "@/app/actions";
 
-export function NewForm() {
+export default function NewForm() {
   const router = useRouter();
   const [state, formAction, isPending] = useActionState(addNoteAction, null);
 
@@ -11,7 +11,7 @@ export function NewForm() {
     if (state?.success) {
       router.push(`/${state?.data?.id}`);
     }
-  }, [state]);
+  }, [state, router]);
 
   return (
     <form action={formAction}>

@@ -1,7 +1,9 @@
 import { getAllNotes } from "@/lib/notes";
-import { NotesGrid } from "@/components/NotesGrid";
-import { NewForm } from "@/components/NewForm";
+import NewForm from "@/components/NewForm";
+import NotesGrid from "@/components/NotesGrid";
 
+// Using parallel route, so we can use the same layout
+// for the edit note form and the notes grid
 export default async function DefaultPage() {
   const notes = await getAllNotes();
   return (

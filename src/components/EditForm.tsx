@@ -3,9 +3,10 @@ import React, { useEffect } from "react";
 import { useActionState } from "react";
 import { useRouter } from "next/navigation";
 import { updateNoteAction } from "@/app/actions";
-import { Note } from "@/lib/notes";
+import { NoteInterface } from "@/lib/notes";
+import { utcToAbsolute } from "@/lib/time";
 
-export default function EditForm({ note }: { note: Note }) {
+export default function EditForm({ note }: { note: NoteInterface }) {
   const [state, formAction, pending] = useActionState(updateNoteAction, null);
   const router = useRouter();
 
@@ -13,7 +14,7 @@ export default function EditForm({ note }: { note: Note }) {
     if (state?.success) {
       router.push("/");
     }
-  }, [state]);
+  }, [state, router]);
 
   return (
     <form action={formAction} className="flex flex-col gap-4">
@@ -32,6 +33,7 @@ export default function EditForm({ note }: { note: Note }) {
         defaultValue={note.content}
         required
       />
+      <p>Last saved: {utcToAbsolute(note.updated_at)}</p>
       <button
         type="submit"
         className="bg-blue-500 text-white px-4 py-2 rounded"

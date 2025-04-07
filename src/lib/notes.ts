@@ -6,7 +6,7 @@ const TABLE = "notes";
 const DB_FILE = "data/notes.sqlite";
 let db: Database | null = null;
 
-export interface Note {
+export interface NoteInterface {
   id: number;
   title: string;
   content: string;
@@ -39,16 +39,16 @@ export async function getDB(): Promise<Database> {
   return db;
 }
 
-export async function getAllNotes(): Promise<Note[]> {
+export async function getAllNotes(): Promise<NoteInterface[]> {
   // In real application I would write a paginated query
   // but for this example I will just fetch all the notes
   const db = await getDB();
-  return db.all<Note[]>(`SELECT * FROM ${TABLE}`);
+  return db.all<NoteInterface[]>(`SELECT * FROM ${TABLE}`);
 }
 
-export async function getNote(id: string): Promise<Note | undefined> {
+export async function getNote(id: string): Promise<NoteInterface | undefined> {
   const db = await getDB();
-  return db.get<Note>(`SELECT * FROM ${TABLE} WHERE id = ?`, id);
+  return db.get<NoteInterface>(`SELECT * FROM ${TABLE} WHERE id = ?`, id);
 }
 
 export async function deleteNoteById(id: number) {
@@ -74,7 +74,7 @@ export async function updateNote(note: {
   );
 }
 
-export async function addNote(): Promise<Note | undefined> {
+export async function addNote(): Promise<NoteInterface | undefined> {
   const db = await getDB();
   const result = await db.run(
     `INSERT INTO ${TABLE} (title, content) VALUES (?, ?)`,
@@ -82,5 +82,5 @@ export async function addNote(): Promise<Note | undefined> {
     ""
   );
   const id = result.lastID;
-  return db.get<Note>(`SELECT * FROM ${TABLE} WHERE id = ?`, id);
+  return db.get<NoteInterface>(`SELECT * FROM ${TABLE} WHERE id = ?`, id);
 }
