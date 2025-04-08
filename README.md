@@ -29,10 +29,9 @@ Video of the interaction:
 3. Run `npm i` to install dependencies and init database (you might need to install **SQLite**)
 4. Use `npm run` to list all available commands
 
-| Command                | Description                                           |
-| ---------------------- | ----------------------------------------------------- |
-| `npm start`            | Creates an optimized build, starts the server and app |
-| `npm run dev`          | Runs dev mode                                         |
-| `npm run build`        | Builds the production version of the project          |
-| `npm run lint`         | Lint errors check                                     |
-| `npm run e2e:headless` | Runs E2E tests with Cypress (if installed)            |
+| Command         | Description                                           |
+| --------------- | ----------------------------------------------------- |
+| `npm start`     | Creates an optimized build, starts the server and app |
+| `npm run dev`   | Runs dev mode                                         |
+| `npm run build` | Builds the production version of the project          |
+| `npm run lint`  | Lint errors check                                     |
