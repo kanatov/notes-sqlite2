@@ -37,7 +37,7 @@ async function initDatabase() {
       ('Vacation Ideas', '1. Visit Japan during cherry blossom season\n2. Explore Iceland''s waterfalls\n3. Relax on the beaches of Bali', '2025-02-05 13:25'),
       ('Book Recommendations', '1. Atomic Habits by James Clear\n2. Deep Work by Cal Newport\n3. The Pragmatic Programmer by Andrew Hunt and David Thomas', '2024-09-12 17:40'),
       ('Fitness Goals', '1. Run 5km three times a week\n2. Start yoga classes\n3. Track daily calorie intake', '2024-07-30 07:50'),
-      ('Birthday Gift Ideas', '1. Noise-canceling headphones\n2. Personalized photo album\n3. Smartwatch', '2025-03-01 12:00'),
+      ('Birthday Gift Ideas', '1. Noise-cancelling headphones\n2. Personalised photo album\n3. Smartwatch', '2025-03-01 12:00'),
       ('Car Maintenance', '1. Change oil\n2. Check tire pressure\n3. Replace windshield wipers', '2024-11-05 15:35'),
       ('Conference Notes', 'Key takeaways:\n- Embrace agile methodologies\n- Focus on user-centric design\n- Invest in team training', '2024-12-25 10:10'),
       ('Home Renovation', '1. Paint the living room\n2. Install new kitchen cabinets\n3. Replace bathroom tiles', '2025-01-10 09:00'),

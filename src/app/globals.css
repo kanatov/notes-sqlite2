@@ -1,1 +1,59 @@
 @import "tailwindcss";
+
+html,
+body,
+main,
+input,
+button,
+label,
+textarea,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+ul,
+li,
+p,
+div,
+img,
+a,
+section {
+  @apply whitespace-pre-wrap bg-transparent text-inherit font-[inherit] scroll-smooth box-border leading-[inherit];
+}
+
+input::placeholder,
+textarea::placeholder {
+  @apply opacity-40 text-inherit;
+}
+
+body {
+  @apply font-(family-name:--font-main) font-normal leading-normal text-gray-800;
+}
+
+@theme {
+  --animate-fade-in: fade-in 0.4s cubic-bezier(0, 0.5, 0.5, 1);
+  --animate-fade-in-spin: fade-in-spin 0.7s cubic-bezier(0, 1.5, 0.5, 1);
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-in-spin {
+    0% {
+      opacity: 0;
+      transform: scale(0.7) rotate(-4deg) translateY(60px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+  }
+}

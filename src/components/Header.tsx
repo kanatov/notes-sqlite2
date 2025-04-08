@@ -1,8 +1,12 @@
-import Link from "next/link";
-export default function Header() {
+import Link from "@/components/Link";
+import NewForm from "@/components/NewForm";
+import Image from "next/image";
+
+export default function Header({ className }: { className?: string }) {
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-10 p-2">
-      <Link href="/">Notes app</Link>
+    <header className={className}>
+      <Image src="/logo.svg" alt="Notes logo" width={60} height={30} />
+      <NewForm />
     </header>
   );
 }
