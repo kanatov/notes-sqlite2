@@ -62,7 +62,7 @@ export async function updateNote(note: {
   content: string;
 }) {
   const db = await getDB();
-  return db.run(
+  db.run(
     `UPDATE ${TABLE}
     SET title = ?,
     content = ?,
@@ -72,6 +72,7 @@ export async function updateNote(note: {
     note.content,
     note.id
   );
+  return getNote(note.id.toString());
 }
 
 export async function addNote(): Promise<NoteInterface | undefined> {

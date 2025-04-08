@@ -1,18 +1,23 @@
 "use server";
 
-import { updateNote, deleteNoteById, addNote } from "@/lib/notes";
+import {
+  updateNote,
+  deleteNoteById,
+  addNote,
+  NoteInterface,
+} from "@/lib/notes";
 import { revalidatePath } from "next/cache";
 
 interface FormActionState {
   success: boolean;
-  data?: { id: number };
+  note?: NoteInterface;
 }
 
 function readFormData(formData: FormData) {
   return {
     id: parseInt(formData.get("id") as string),
-    title: formData.get("title") as string | null,
-    content: formData.get("content") as string | null,
+    title: formData.get("title") as string,
+    content: formData.get("content") as string,
   };
 }
 
@@ -21,13 +26,13 @@ export async function updateNoteAction(
   formData: FormData
 ): Promise<FormActionState> {
   const { id, title, content } = readFormData(formData);
-  if (!id || !title || !content) {
+  if (!id) {
     return { success: false };
   }
 
-  await updateNote({ id, title, content });
+  const note = await updateNote({ id, title, content });
   revalidatePath("/");
-  return { success: true };
+  return { success: true, note };
 }
 
 export async function deleteNoteAction(
@@ -54,6 +59,6 @@ export async function addNoteAction(
   revalidatePath("/");
   return {
     success: true,
-    data: { id: note.id },
+    note,
   };
 }

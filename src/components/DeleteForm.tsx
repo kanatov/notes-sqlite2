@@ -1,23 +1,17 @@
 "use client";
-import { useEffect, useActionState } from "react";
-import { useRouter } from "next/navigation";
+import { useActionState } from "react";
 import { deleteNoteAction } from "@/app/actions";
+import Form from "next/form";
 
 export default function DeleteForm({ id }: { id: number }) {
   const [state, formAction, isPending] = useActionState(deleteNoteAction, null);
-  const router = useRouter();
-  useEffect(() => {
-    if (state?.data?.id) {
-      router.push(`/${state?.data?.id}`);
-    }
-  }, [state, router]);
 
   return (
-    <form action={formAction} className="relative z-10">
+    <Form action={formAction} className="relative z-10">
       <input type="hidden" name="id" value={id} />
       <button type="submit" disabled={isPending}>
         {isPending ? "Deleting..." : "Delete"}
       </button>
-    </form>
+    </Form>
   );
 }

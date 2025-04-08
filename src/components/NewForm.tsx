@@ -8,8 +8,8 @@ export default function NewForm() {
   const [state, formAction, isPending] = useActionState(addNoteAction, null);
 
   useEffect(() => {
-    if (state?.success) {
-      router.push(`/${state?.data?.id}`);
+    if (state?.success && state?.note) {
+      router.push(`/${state.note.id}`);
     }
   }, [state, router]);
 
