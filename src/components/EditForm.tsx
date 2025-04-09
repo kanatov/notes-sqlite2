@@ -18,7 +18,7 @@ export default function EditForm({ note }: { note: NoteInterface }) {
   const debouncedRef = useRef<() => void>(
     debouncer(() => {
       formRef.current?.requestSubmit();
-    }, 1000)
+    }, 500)
   );
 
   const handleChange = () => {
