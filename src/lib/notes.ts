@@ -46,6 +46,17 @@ export async function getAllNotes(): Promise<NoteInterface[]> {
   return db.all<NoteInterface[]>(`SELECT * FROM ${TABLE}`);
 }
 
+export async function getFirstNote(): Promise<NoteInterface | undefined> {
+  const db = await getDB();
+  const note = await db.get<NoteInterface>(
+    `SELECT * FROM ${TABLE} ORDER BY id ASC LIMIT 1`
+  );
+  if (!note) {
+    return undefined;
+  }
+  return note;
+}
+
 export async function getNote(id: string): Promise<NoteInterface | undefined> {
   const db = await getDB();
   return db.get<NoteInterface>(`SELECT * FROM ${TABLE} WHERE id = ?`, id);

@@ -12,7 +12,7 @@ export default function Button({
   return (
     <button
       type={type}
-      className={`cursor-pointer hover:bg-gray-200 hover:text-gray-900 rounded-full transition-all ease-in-out duration-200 ${className}`}
+      className={`cursor-pointer rounded-md transition-all ease-in-out duration-200 ${className}`}
       disabled={disabled}
     >
       {children}

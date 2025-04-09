@@ -12,7 +12,7 @@ export default function Link({
   return (
     <LinkNext
       href={href}
-      className={`cursor-pointer hover:bg-gray-200 rounded-full transition-all ease-in-out duration-200 ${className}`}
+      className={`cursor-pointer transition-all ease-in-out duration-200 hover:text-secondary ${className}`}
     >
       {children}
     </LinkNext>

@@ -22,7 +22,7 @@ export default function DeleteForm({
       <Button
         type="submit"
         disabled={isPending}
-        className={`px-3 py-1 -mr-2 hover:!bg-orange-800/30 ${className}`}
+        className={`px-3 py-1 -mr-2 ${className}`}
       >
         {isPending ? "Deleting..." : "Delete"}
       </Button>

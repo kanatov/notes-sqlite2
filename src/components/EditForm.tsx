@@ -9,29 +9,20 @@ import Link from "@/components/Link";
 import Form from "next/form";
 import DeleteForm from "@/components/DeleteForm";
 
-function getColour(id: number) {
-  const colours = [
-    "to-orange-200 border-orange-900/40 shadow-orange-900",
-    "to-blue-200 border-blue-900/40 shadow-blue-900",
-    "to-indigo-200 border-indigo-900/40 shadow-indigo-900",
-    "to-amber-200 border-amber-900/40 shadow-amber-900",
-    "to-rose-200 border-rose-900/40 shadow-rose-900",
-  ];
-  return colours[id % colours.length];
-}
-
 export default function EditForm({ note }: { note: NoteInterface }) {
   const [state, formAction, isPending] = useActionState(updateNoteAction, null);
   const [timestamp, setTimestamp] = useState(
     `Last saved: ${utcToRelative(note.updated_at)}`
   );
   const formRef = useRef<HTMLFormElement>(null);
+  const debouncedRef = useRef<() => void>(
+    debouncer(() => {
+      formRef.current?.requestSubmit();
+    }, 1000)
+  );
 
-  const debounce = debouncer(() => {
-    formRef.current?.requestSubmit();
-  }, 500);
   const handleChange = () => {
-    debounce();
+    debouncedRef.current?.();
   };
 
   useEffect(() => {
@@ -50,39 +41,49 @@ export default function EditForm({ note }: { note: NoteInterface }) {
   }, [state]);
 
   return (
-    <section
-      className={`h-full flex flex-col flex-1 bg-gradient-to-b from-white bg-size-[100%_300%] bg-position-[center_center] p-4 pb-2 rounded-lg drop-shadow-lg border ease-out ${getColour(
-        note.id
-      )}`}
-    >
-      <Link href="/" className="absolute top-2 right-4 text-2xl">
-        &times;
-      </Link>
-      <Form
-        action={formAction}
-        ref={formRef}
-        className="flex flex-col justify-stretch flex-1"
+    <section className={`h-full flex flex-col flex-1 drop-shadow-lg`}>
+      <div
+        className={`h-full flex flex-col flex-1 bg-gradient-to-b from-white to-light p-4 pb-2 border border-b-0 border-blue-950/90 rounded-lg rounded-b-none`}
       >
-        {note.id !== null && <input type="hidden" name="id" value={note.id} />}
-        <input
-          name="title"
-          placeholder="Title"
-          className="w-full p-4 font-bold border-0 outline-none"
-          defaultValue={note.title}
-          onChange={handleChange}
-        />
-        <textarea
-          className="flex-1 w-full h-full p-4 border-0 outline-none resize-none"
-          name="content"
-          placeholder="Content"
-          rows={10}
-          defaultValue={note.content}
-          onChange={handleChange}
-        />
-      </Form>
-      <div className="flex flex-col sm:flex-row justify-between border-t-gray-900/10 border-t-2 pb-1 pt-3 mt-4 mx-4">
+        <Link
+          href="/"
+          className="absolute top-2 right-2 text-4xl font-light hover:bg-secondary/10 px-2.5 py-0 rounded-sm"
+        >
+          &times;
+        </Link>
+        <Form
+          action={formAction}
+          ref={formRef}
+          className="flex flex-col justify-stretch flex-1"
+        >
+          {note.id !== null && (
+            <input type="hidden" name="id" value={note.id} />
+          )}
+          <input
+            name="title"
+            placeholder="Title"
+            className="w-full p-4 border-0 outline-none text-2xl"
+            defaultValue={note.title}
+            onChange={handleChange}
+            maxLength={25}
+          />
+          <textarea
+            className="flex-1 w-full h-full p-4 border-0 outline-none resize-none"
+            name="content"
+            placeholder="Content"
+            rows={10}
+            defaultValue={note.content}
+            onChange={handleChange}
+            autoFocus
+          />
+        </Form>
+      </div>
+      <div className="flex flex-col sm:flex-row justify-between items-center px-8 py-2 text-xs text-white/70 bg-secondary border border-blue-950 transition-all duration-300 ease-out rounded-lg rounded-t-none">
         <p className="!leading-[2]">{isPending ? "Saving..." : timestamp}</p>
-        <DeleteForm id={note.id} className="!bg-orange-700/20" />
+        <DeleteForm
+          id={note.id}
+          className="text-white hover:text-white hover:bg-red-500/70 px-4 py-2"
+        />
       </div>
     </section>
   );

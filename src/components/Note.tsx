@@ -4,42 +4,33 @@ import { NoteInterface } from "@/lib/notes";
 import { getPreview } from "@/lib/text";
 import { utcToAbsolute } from "@/lib/time";
 
-function getColour(id: number) {
-  const colours = [
-    "to-orange-400/40 border-orange-900/20 shadow-orange-500/40",
-    "to-blue-400/40 border-blue-900/20 shadow-blue-500/40",
-    "to-indigo-400/40 border-indigo-900/20 shadow-indigo-500/40",
-    "to-amber-400/40 border-amber-900/20 shadow-amber-500/40",
-    "to-rose-400/40 border-rose-900/20 shadow-rose-500/40",
-  ];
-  return colours[id % colours.length];
-}
-
 export default function Notes({ note }: { note: NoteInterface }) {
   return (
-    <section className="relative group">
+    <section className="relative group transition-all duration-300 ease-out">
       <div
-        className={`relative w-full flex flex-col bg-gradient-to-b from-white bg-size-[100%_300%] bg-position-[center_center] group-hover:bg-position-[center_95%] group-hover:bg-size-[100%_130%] p-4 pb-2 rounded-md drop-shadow-md border transition-all duration-300 ease-out group-hover:px-5 group-hover:-translate-y-1 group-hover:-translate-x-1 group-hover:shadow-lg/60 group-hover:drop-shadow-xl group-hover:w-[calc(100%+.5rem)] ${getColour(
-          note.id
-        )}`}
+        className={`relative w-full flex flex-col rounded-lg overflow-hidden transition-all duration-300 ease-out shadow-[0px_-6px_12px_rgba(0,0,0,0.02),0px_4px_10px_rgba(0,0,0,0.06)] border border-gray-300 group-hover:border-gray-400/60 group-hover:drop-shadow-2xl group-hover:drop-shadow-gray-800/15`}
         onMouseEnter={(e) =>
-          (e.currentTarget.style.transform = `rotate(${
-            Math.random() * 2 - 1
-          }deg)`)
+          (e.currentTarget.style.transform = `translateY(-${
+            Math.random() * 0.2 + 0.1
+          }rem)`)
         }
-        onMouseLeave={(e) => (e.currentTarget.style.transform = "rotate(0deg)")}
+        onMouseLeave={(e) =>
+          (e.currentTarget.style.transform = "translateY(0)")
+        }
       >
-        <Link
-          href={`/${note.id}`}
-          className="absolute top-0 left-0 w-full h-full"
-        />
-        <Link href={`/${note.id}`} className="flex-1 pb-3">
-          <h3 className="font-bold">{note.title}</h3>
-          <p className="whitespace-break-spaces text-ellipsis overflow-hidden">
-            {getPreview(note.content)}
-          </p>
-        </Link>
-        <div className="flex justify-between items-center pt-2 text-xs text-black/60">
+        <div className="p-8 pt-6 bg-gradient-to-b from-white to-white/60 group-hover:bg-white transition-all duration-300 ease-out">
+          <Link
+            href={`/${note.id}`}
+            className="absolute top-0 left-0 w-full h-full"
+          />
+          <Link href={`/${note.id}`} className="flex flex-col flex-1 gap-4">
+            <h3 className="text-2xl truncate">{note.title}</h3>
+            <p className="whitespace-break-spaces text-ellipsis overflow-hidden">
+              {getPreview(note.content)}
+            </p>
+          </Link>
+        </div>
+        <div className="flex justify-between items-center px-8 py-2 text-xs text-black/60 bg-light group-hover:bg-light border-t border-gray-200/60 transition-all duration-300 ease-out">
           <p>{utcToAbsolute(note.updated_at)}</p>
         </div>
       </div>

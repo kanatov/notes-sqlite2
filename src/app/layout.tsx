@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Noto_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 
-const main = Poppins({
+const main = Noto_Sans({
   variable: "--font-main",
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["300", "400", "600"],
 });
 
 export const metadata: Metadata = {
@@ -22,14 +22,14 @@ export default function RootLayout({
   notesGrid: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-light">
       <body
-        className={`${main.variable} antialiased pt-16 bg-no-repeat bg-gradient-to-b from-white to-sky-100 min-h-screen bg-fixed`}
+        className={`${main.variable} antialiased pt-16 bg-gradient-to-b from-gray-200/0 to-gray-200 from-50% to-100%  min-h-screen bg-fixed`}
       >
-        <Header className="fixed inset-0 top-4 bottom-auto mx-auto bg-white shadow-sm drop-shadow-xl border-b-1 border-gray-200 z-10 p-2 pl-5 w-fit flex gap-6 rounded-full items-center transition-all ease-in-out duration-200 hover:p-2.5 hover:pl-5.5 hover:top-3.5" />
-        <main className="max-w-4xl mx-auto mt-6 pb-12">
-          {children}
+        <Header className="fixed inset-0 bottom-auto mx-auto bg-white border-b-1 border-gray-200 z-10 h-20 flex gap-6 items-center justify-between transition-all ease-in-out duration-200" />
+        <main className="max-w-5xl px-8 mx-auto mt-12 pb-12 gap-8 flex items-stretch">
           {notesGrid}
+          {children}
         </main>
       </body>
     </html>

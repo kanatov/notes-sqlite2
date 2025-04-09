@@ -20,7 +20,7 @@ export default function NewForm() {
       <Button
         type="submit"
         disabled={isPending}
-        className="py-2 px-4 bg-gradient-to-b from-orange-300/20 to-orange-400/30 shadow-orange-500/40 hover:!bg-orange-600/20"
+        className="py-2 px-4.5 bg-secondary text-white hover:bg-[#2a49e3]"
       >
         {isPending ? "Adding..." : "New note"}
       </Button>

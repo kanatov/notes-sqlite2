@@ -5,9 +5,5 @@ import NotesGrid from "@/components/NotesGrid";
 // for the edit note form and the notes grid
 export default async function DefaultPage() {
   const notes = await getAllNotes();
-  return (
-    <section className="p-8">
-      <NotesGrid notes={notes} />
-    </section>
-  );
+  return <NotesGrid notes={notes} />;
 }
