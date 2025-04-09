@@ -34,26 +34,26 @@ export default function EditForm({ note }: { note: NoteInterface }) {
     debounce();
   };
 
-  const updateTimestamp = () => {
-    if (state?.success === false) {
-      setTimestamp("Both title and content are required");
-    } else if (state?.note) {
-      setTimestamp(`Last saved: ${utcToRelative(state?.note?.updated_at)}`);
-    }
-  };
-
   useEffect(() => {
+    const updateTimestamp = () => {
+      if (state?.success === false) {
+        setTimestamp("Both title and content are required");
+      } else if (state?.note) {
+        setTimestamp(`Last saved: ${utcToRelative(state?.note?.updated_at)}`);
+      }
+    };
     updateTimestamp();
     const interval = setInterval(() => updateTimestamp(), 60000);
     return () => {
       clearInterval(interval);
     };
   }, [state]);
-  let colour = getColour(note.id);
 
   return (
     <section
-      className={`h-full flex flex-col flex-1 bg-gradient-to-b from-white bg-size-[100%_300%] bg-position-[center_center] p-4 pb-2 rounded-lg drop-shadow-lg border ease-out ${colour}`}
+      className={`h-full flex flex-col flex-1 bg-gradient-to-b from-white bg-size-[100%_300%] bg-position-[center_center] p-4 pb-2 rounded-lg drop-shadow-lg border ease-out ${getColour(
+        note.id
+      )}`}
     >
       <Link href="/" className="absolute top-2 right-4 text-2xl">
         &times;

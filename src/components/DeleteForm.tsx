@@ -11,7 +11,10 @@ export default function DeleteForm({
   id: number;
   className?: string;
 }) {
-  const [state, formAction, isPending] = useActionState(deleteNoteAction, null);
+  const [_state, formAction, isPending] = useActionState(
+    deleteNoteAction,
+    null
+  );
 
   return (
     <Form action={formAction} className="relative z-10">

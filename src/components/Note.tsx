@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { NoteInterface } from "@/lib/notes";
 import { getPreview } from "@/lib/text";
-import DeleteForm from "@/components/DeleteForm";
 import { utcToAbsolute } from "@/lib/time";
 
 function getColour(id: number) {
@@ -14,11 +13,6 @@ function getColour(id: number) {
     "to-rose-400/40 border-rose-900/20 shadow-rose-500/40",
   ];
   return colours[id % colours.length];
-}
-
-function getRotation(id: number) {
-  const rotations = [-5, -2.5, 0, 2.5, 5];
-  return rotations[id % rotations.length];
 }
 
 export default function Notes({ note }: { note: NoteInterface }) {
