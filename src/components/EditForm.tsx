@@ -14,6 +14,11 @@ export default function EditForm({ note }: { note: NoteInterface }) {
   const [timestamp, setTimestamp] = useState(
     `Last saved: ${utcToRelative(note.updated_at)}`
   );
+  const [formState, setFormState] = useState({
+    title: note.title,
+    content: note.content,
+  });
+
   const formRef = useRef<HTMLFormElement>(null);
   const debouncedRef = useRef<() => void>(
     debouncer(() => {
@@ -21,15 +26,20 @@ export default function EditForm({ note }: { note: NoteInterface }) {
     }, 500)
   );
 
-  const handleChange = () => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormState((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
     debouncedRef.current?.();
   };
 
   useEffect(() => {
     const updateTimestamp = () => {
-      if (state?.success === false) {
-        setTimestamp("Both title and content are required");
-      } else if (state?.note) {
+      if (state?.note) {
         setTimestamp(`Last saved: ${utcToRelative(state?.note?.updated_at)}`);
       }
     };
@@ -47,7 +57,7 @@ export default function EditForm({ note }: { note: NoteInterface }) {
       >
         <Link
           href="/"
-          className="absolute top-2 right-2 text-4xl font-light hover:bg-secondary/10 px-2.5 py-0 rounded-sm"
+          className="absolute top-2 right-2 text-4xl font-light hover:bg-secondary/10 rounded-sm leading-normal flex justify-center items-center w-10 h-10"
         >
           &times;
         </Link>
@@ -63,7 +73,7 @@ export default function EditForm({ note }: { note: NoteInterface }) {
             name="title"
             placeholder="Title"
             className="w-full p-4 border-0 outline-none text-2xl"
-            defaultValue={note.title}
+            value={formState.title}
             onChange={handleChange}
             maxLength={25}
           />
@@ -72,7 +82,7 @@ export default function EditForm({ note }: { note: NoteInterface }) {
             name="content"
             placeholder="Content"
             rows={10}
-            defaultValue={note.content}
+            value={formState.content}
             onChange={handleChange}
             autoFocus
           />

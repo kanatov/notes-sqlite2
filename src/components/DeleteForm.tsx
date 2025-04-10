@@ -1,6 +1,7 @@
 "use client";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { deleteNoteAction } from "@/app/actions";
+import { useRouter } from "next/navigation";
 import Form from "next/form";
 import Button from "@/components/Button";
 
@@ -11,10 +12,13 @@ export default function DeleteForm({
   id: number;
   className?: string;
 }) {
-  const [_state, formAction, isPending] = useActionState(
-    deleteNoteAction,
-    null
-  );
+  const [state, formAction, isPending] = useActionState(deleteNoteAction, null);
+  const router = useRouter();
+  useEffect(() => {
+    if (state?.success) {
+      router.push("/");
+    }
+  }, [state, router]);
 
   return (
     <Form action={formAction} className="relative z-10">

@@ -11,8 +11,9 @@ export default function Link({
 }) {
   return (
     <LinkNext
+      draggable={false}
       href={href}
-      className={`cursor-pointer transition-all ease-in-out duration-200 hover:text-secondary ${className}`}
+      className={`cursor-pointer select-none transition-all ease-in-out duration-200 hover:text-secondary ${className}`}
     >
       {children}
     </LinkNext>

@@ -31,7 +31,7 @@ export async function updateNoteAction(
   }
 
   const note = await updateNote({ id, title, content });
-  revalidatePath(`/${id}`);
+  revalidatePath("/");
   return { success: true, note };
 }
 

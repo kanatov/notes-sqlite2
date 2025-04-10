@@ -7,7 +7,13 @@ export default function Header({ className }: { className?: string }) {
     <header className={className}>
       <div className="flex justify-between gap-2 max-w-5xl w-full mx-auto px-8 h-full items-center">
         <Link href="/">
-          <Image src="/logo.svg" alt="Notes logo" width={110} height={55} />
+          <Image
+            src="/logo.svg"
+            alt="Notes logo"
+            width={110}
+            height={55}
+            priority
+          />
         </Link>
         <NewForm />
       </div>
