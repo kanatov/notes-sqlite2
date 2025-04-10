@@ -1,6 +1,5 @@
 import { getAllNotes } from "@/lib/notes";
 import NotesGrid from "@/components/NotesGrid";
-import NewForm from "@/components/NewForm";
 
 // Using parallel route, so we can use the same layout
 // for the edit note form and the notes grid
