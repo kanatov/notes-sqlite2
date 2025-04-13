@@ -7,14 +7,16 @@ import {
 } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 
-function utcToLocal(utc: string): Date {
+function utcToLocal(utc: string = ""): Date | null {
+  if (!utc) return null;
   const date = new Date(utc + "Z");
   const localTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   return toZonedTime(date, localTimeZone);
 }
 
-export function utcToAbsolute(utc: string): string {
-  const local = utcToLocal(utc);
+export function utcToAbsolute(utc: string = ""): string {
+  if (!utc) return "";
+  const local = utcToLocal(utc) as Date;
   const sameYear = isSameYear(local, new Date());
   return format(
     local,
@@ -23,7 +25,8 @@ export function utcToAbsolute(utc: string): string {
 }
 
 export function utcToRelative(utc: string): string {
-  const local = utcToLocal(utc);
+  if (!utc) return "";
+  const local = utcToLocal(utc) as Date;
   const diff = differenceInMinutes(new Date(), local);
   let relative = "Just now";
   if (diff) {

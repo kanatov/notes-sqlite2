@@ -1,6 +1,7 @@
 import { NoteInterface } from "@/lib/notes";
-import Note from "@/components/Note";
+import NoteReact from "@/components/Note/NoteReact";
 import { compareDesc } from "date-fns";
+import Link from "next/link";
 
 export default function NotesGrid({ notes }: { notes: NoteInterface[] }) {
   return (
@@ -9,7 +10,9 @@ export default function NotesGrid({ notes }: { notes: NoteInterface[] }) {
         .sort((a, b) => compareDesc(a.updated_at, b.updated_at))
         .map((note) => (
           <li key={note.id}>
-            <Note note={note} />
+            <Link href={`/${note.id}`} className="block">
+              <NoteReact note={note} />
+            </Link>
           </li>
         ))}
     </ul>

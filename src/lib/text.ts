@@ -1,4 +1,4 @@
-export function getPreview(text: string): string {
+export function getPreview(text: string = ""): string {
   const maxLength = 128;
   const maxLines = 7;
   let shorten = false;
