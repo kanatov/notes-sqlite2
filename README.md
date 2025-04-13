@@ -14,8 +14,8 @@
 
 #### Spent time
 
-32 hours Next.js code and functionality
-8 hours to pick up web components and integration with Next.js
+- 32 hours Next.js code and CRUD functionality
+- 8 hours to pick up web components and integration with Next.js
 
 #### The most challenging moments
 
