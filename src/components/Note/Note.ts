@@ -20,12 +20,14 @@ export class NoteWebComponent extends LitElement {
   render() {
     return html`<section
       class="relative group transition-all duration-300 ease-out"
-    ><div
+    >
+      <div
         class="relative w-full flex flex-col rounded-lg overflow-hidden transition-all duration-300 ease-out shadow-[0px_-6px_12px_rgba(0,0,0,0.02),0px_4px_10px_rgba(0,0,0,0.06)] border border-gray-300 group-hover:border-gray-400/60 group-hover:drop-shadow-2xl group-hover:drop-shadow-gray-800/15"
         @mouseover="${this.handleMouseOver}"
         @mouseleave="${this.handleMouseLeave}"
         style="transform: translateY(0px);"
-      ><div
+      >
+        <div
           class="p-8 pt-6 bg-gradient-to-b from-white to-white/60 group-hover:bg-white transition-all duration-300 ease-out"
         ><div
         class="flex flex-col flex-1 gap-4"><h3
