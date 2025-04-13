@@ -2,19 +2,20 @@
 
 ## Project features
 
-|                                 |                                                           |
-| ------------------------------- | --------------------------------------------------------- |
-| **Next.js, SQLite, TypeScript** | + Tailwind for styling.                                   |
-| **CRUD operations**             | Server actions for data mutations.                        |
-| **App routes**                  | Dynamic and parallel routing features of Next.js.         |
-| **useActionState()**            | Manages state between client and server components.       |
-| **Relative time stamps**        | Time-zone accurate and human-readable timestamps.         |
-| **Continious saving**           | No need to hit save button every time to save the changes |
-| **Desktop and mobile versions** |                                                           |
+|                                                 |                                                           |
+| ----------------------------------------------- | --------------------------------------------------------- |
+| **Next.js, SQLite, TypeScript, Web Components** | + Tailwind for styling and Lit for web components.        |
+| **CRUD operations**                             | Server actions for data mutations.                        |
+| **App routes**                                  | Dynamic and parallel routing features of Next.js.         |
+| **useActionState()**                            | Manages state between client and server components.       |
+| **Relative time stamps**                        | Time-zone accurate and human-readable timestamps.         |
+| **Continious saving**                           | No need to hit save button every time to save the changes |
+| **Desktop and mobile versions**                 |                                                           |
 
 #### Spent time
 
-32 hours
+32 hours Next.js code and functionality
+8 hours to pick up web components and integration with Next.js
 
 #### The most challenging moments
 
