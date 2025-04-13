@@ -27,13 +27,18 @@ export class NoteWebComponent extends LitElement {
         style="transform: translateY(0px);"
       ><div
           class="p-8 pt-6 bg-gradient-to-b from-white to-white/60 group-hover:bg-white transition-all duration-300 ease-out"
-        ><div class="flex flex-col flex-1 gap-4"><h3
-        class="text-2xl truncate">${this.note?.title}</h3><p
+        ><div
+        class="flex flex-col flex-1 gap-4"><h3
+        class="text-2xl truncate">${
+          this.note?.title
+        }</h3><p
         class="whitespace-break-spaces text-ellipsis overflow-hidden">${
           getPreview(this.note?.content)
         }</p></div></div><div
           class="flex justify-between items-center px-8 py-2 text-xs text-black/60 bg-light group-hover:bg-light border-t border-gray-200/60 transition-all duration-300 ease-out"
-        ><p>${utcToAbsolute(this.note?.updated_at)}</p></div></div></section>`;
+        ><p>${
+          utcToAbsolute(this.note?.updated_at)
+        }</p></div></div></section>`;
   }
 
   handleMouseOver(e: Event) {
